@@ -8,10 +8,11 @@ contract MySBT is ERC721 {
     uint256 Counter;
 
     constructor() ERC721("MySBT", "MSBT") {}
-    
-    function totalSupply(){
-        return Counter
+
+    function totalSupply() public view returns (uint256) {
+        return Counter;
     }
+
     function safeMint(address to) public {
         uint256 tokenId = Counter;
         _safeMint(to, tokenId);
