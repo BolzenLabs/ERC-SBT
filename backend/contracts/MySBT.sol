@@ -14,8 +14,7 @@ contract MySBT is ERC721 {
     }
 
     function safeMint(address to) public {
-        uint256 tokenId = Counter;
-        _safeMint(to, tokenId);
         Counter++;
+        _safeMint(to, Counter);
     }
 }
