@@ -1,2 +1,6 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script lang="ts">
+</script>
+
+<main class="flex flex-col p-10 w-screen h-screen items-center gap-5 font-serif">
+	<h1 class="text-5xl text-black font-bold">BolzenLabs</h1>
+</main>
