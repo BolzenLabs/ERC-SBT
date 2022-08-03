@@ -1,10 +1,10 @@
-require("@nomiclabs/hardhat-waffle");
+require("@nomicfoundation/hardhat-toolbox");
+require("@nomiclabs/hardhat-ethers");
 require("dotenv").config();
 
 // This is a sample Hardhat task. To learn how to create your own go to
 // https://hardhat.org/guides/create-task.html
-const ALCHEMY_API_KEY = process.env.API_KEY;
-const PRIVATE_KEY = process.env.PRIVATE_KEY;
+const { RINKEBY_PRIVATE_KEY, RINKEBY_ALCHEMY_URL } = process.env;
 task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
   const accounts = await hre.ethers.getSigners();
 
@@ -23,8 +23,8 @@ module.exports = {
   solidity: "0.8.0",
   networks: {
     rinkeby: {
-      url: `https://eth-rinkeby.alchemyapi.io/v2/${ALCHEMY_API_KEY}`,
-      accounts: [PRIVATE_KEY],
+      url: RINKEBY_ALCHEMY_URL,
+      accounts: [`0x${RINKEBY_PRIVATE_KEY}`],
     },
   },
 };
