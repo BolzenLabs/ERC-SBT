@@ -1,0 +1,56 @@
+.hero {
+	::after {
+		content: '';
+		position: absolute;
+		width: 150px;
+		height: 150px;
+		left: 89px;
+		top: 223px;
+		background: url('../../lib/assets/elipse-white.svg');
+	}
+	h1 + p {
+		line-height: 150%;
+		max-width: fit-content;
+		margin-bottom: 20px;
+	}
+	h1 {
+		font-family: 'Audiowide', cursive;
+		font-size: 3.52rem;
+		margin-bottom: 8px;
+	}
+	// Card
+	.card {
+		border-radius: $border-radius;
+		width: 300px;
+		height: auto;
+		background: rgba(128, 251, 80, 0.1);
+		padding: 10px;
+		img {
+			width: fit-content;
+			width: 280px;
+			height: 300px;
+			object-fit: cover;
+		}
+		.card-footer {
+			h6 {
+				font-family: 'Audiowide', cursive;
+			}
+		}
+	}
+	// .card-container {
+	// 	padding: 20px 12px;
+	// }
+	// .card-top {
+	// 	border-radius: $border-radius;
+	// 	padding: 10px 30px;
+	// 	opacity: 1;
+	// 	z-index: 999;
+	// 	img {
+	// 		width: auto;
+	// 		border: none;
+	// 	}
+	// }
+	// .card-bottom {
+	// 	padding: 40px;
+	// }
+}

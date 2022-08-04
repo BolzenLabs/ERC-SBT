@@ -51,16 +51,23 @@
 .space-x > :last-child {
 	margin-right: 0;
 }
+.space-x > :first-child {
+	margin-left: 0;
+}
 .space-y > * {
 	margin-bottom: 5px;
 }
 .space-y > :last-child {
 	margin-right: 0;
 }
+.center {
+	margin: 0 auto !important;
+}
 // padding
 
 // section and container
-section {
+section,
+footer {
 	padding: 5rem 30px;
 }
 nav {
@@ -76,10 +83,7 @@ nav {
 .radius-full {
 	border-radius: 100%;
 }
-// centering
-.center {
-	margin: 0 auto !important;
-}
+
 // display inline/block/inline-block
 .block {
 	display: block;
