@@ -1,13 +1,16 @@
 .hero {
-	::after {
-		content: '';
-		position: absolute;
-		width: 150px;
-		height: 150px;
-		left: 89px;
-		top: 223px;
-		background: url('../../lib/assets/elipse-white.svg');
-	}
+	// CIRCLES HERE
+	// ::after {
+	// 	content: '';
+	// 	width: 30px;
+	// 	height: 30px;
+	// 	background: url('../../lib/assets/elipse-white.png') no-repeat -30px -50px fixed;
+	// 	top: 100px;
+	// 	right: 5px;
+	// 	position: absolute;
+	// 	display: inline-block;
+	// 	z-index: 21;
+	// }
 	h1 + p {
 		line-height: 150%;
 		max-width: fit-content;
@@ -20,11 +23,8 @@
 	}
 	// Card
 	.card {
-		border-radius: $border-radius;
 		width: 300px;
 		height: auto;
-		background: rgba(128, 251, 80, 0.1);
-		padding: 10px;
 		img {
 			width: fit-content;
 			width: 280px;
@@ -37,20 +37,19 @@
 			}
 		}
 	}
-	// .card-container {
-	// 	padding: 20px 12px;
-	// }
-	// .card-top {
-	// 	border-radius: $border-radius;
-	// 	padding: 10px 30px;
-	// 	opacity: 1;
-	// 	z-index: 999;
-	// 	img {
-	// 		width: auto;
-	// 		border: none;
-	// 	}
-	// }
-	// .card-bottom {
-	// 	padding: 40px;
-	// }
+	.btn {
+		margin-bottom: 30px;
+	}
+	.hero-social-proof {
+		img {
+			width: 100px;
+			height: auto;
+		}
+	}
+}
+// why us
+.why-us {
+	.card {
+		border: 1.5px solid $white-200;
+	}
 }
