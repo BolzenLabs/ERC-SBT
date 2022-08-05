@@ -11,6 +11,32 @@
 	// 	display: inline-block;
 	// 	z-index: 21;
 	// }
+	// background: url('https://i.postimg.cc/Kznhz7QN/bg-hero.png') no-repeat top;
+	// background-size: cover;
+	// .white-circle,
+	.green-circle,
+	.blue-circle,
+	.orange-circle {
+		position: absolute;
+		border-radius: 80%;
+	}
+	.white-circle {
+		top: 0;
+		left: 0;
+	}
+	.green-circle {
+		top: 80;
+		right: 0;
+	}
+	.blue-circle {
+		top: 40;
+		right: 0;
+	}
+	.orange-circle {
+		top: 60;
+		right: 0;
+	}
+
 	h1 + p {
 		line-height: 150%;
 		max-width: fit-content;
@@ -49,7 +75,13 @@
 }
 // why us
 .why-us {
+	.grid {
+		grid-template-columns: repeat(3, 1fr);
+		justify-content: center;
+		column-gap: 10px;
+	}
 	.card {
 		border: 1.5px solid $white-200;
+		background-color: $dark-gray;
 	}
 }

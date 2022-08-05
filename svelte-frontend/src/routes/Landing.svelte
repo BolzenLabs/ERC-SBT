@@ -3,31 +3,52 @@
   import GitCoin from '$lib/assets/gitcoin.svg'
   import Zilliqa from '$lib/assets/zilliqaLogo.svg'
   import Web3 from '$lib/assets/web3.svg'
+  // gradient svg
+  import WhiteCircle from '../lib/assets/elipse-white.svg'
+
+  import OrangeCircle from '../lib/assets/elipse-orange.svg'
+  import BlueCircle from '../lib/assets/elipse-blue.svg'
+  import GreenCircle from '../lib/assets/elipse-green.svg'
+  // why us icons
+  import User from '$lib/assets/user.svg'
+  import Verified from '$lib/assets/verified.svg'
+  import Tool from '$lib/assets/tool.svg'
+
   const AdaptiveContentProps = [
   {
     title: " What is an SBT?",
     subtitle: "On-Chain Identity",
     content:"The Zilliqa Soul-Bound Token is intended to be a POC token that enables users to own their on-chain identity. At its core, it is non-transferable token that users mint for themselves.",
+    img: User,
     subcontent: "",
   },
   {
     title: "Purpose of SBT?",
-    subtitle: "incentivizing utility to users",
-    content:
-      "SBT's bring utility by incentivizing users to interact with the underlying platform to grow their SBT Profile. Users are incentivized through earning educational milestones or solving societal problem. Rewards can be generatged as NFTs, digital assets or just a simple “kudos” on the Profile Page. ERC-SBT establishes a sense of reputation and trust in profiles which is essential for thriving online communities.",
+    subtitle: "incentivizing utility",
+    // content:
+    //   "SBT's bring utility by incentivizing users to interact with the underlying platform to grow their SBT Profile. Users are incentivized through earning educational milestones or solving societal problem. Rewards can be generatged as NFTs, digital assets or just a simple “kudos” on the Profile Page. ERC-SBT establishes a sense of reputation and trust in profiles which is essential for thriving online communities.",
+    content:"The Zilliqa Soul-Bound Token is intended to be a POC token that enables users to own their on-chain identity. At its core, it is non-transferable token that users mint for themselves.",
+
+    img: Verified,
     subcontent: "",
   },
   {
     title: "Our vision?",
     subtitle: "Constant innovation",
-    content:
-      "The concept of an SBT is rather loosely defined and quite novel. Thus, the vision of project reaches far beyond what has currently implemented. Nevertheless, this project serves as one of many starting points for powerful idea that will enable another layer of incentivization on top of decentralized digital ownership.",
+    // content:
+    //   "The concept of an SBT is rather loosely defined and quite novel. Thus, the vision of project reaches far beyond what has currently implemented. Nevertheless, this project serves as one of many starting points for powerful idea that will enable another layer of incentivization on top of decentralized digital ownership.",
+    content:"The Zilliqa Soul-Bound Token is intended to be a POC token that enables users to own their on-chain identity. At its core, it is non-transferable token that users mint for themselves.",
+    img: Tool,
     subcontent: "",
   },
 ];
 </script>
 
 <section class="hero">
+  <!-- <img class="white-circle" src={WhiteCircle} alt="">
+  <img class="green-circle" src={GreenCircle} alt=""> -->
+  <!-- <img class="orange-circle" src={OrangeCircle} alt=""> -->
+  <!-- <img class="blue-circle" src={BlueCircle} alt=""> -->
   <div class="container flex flex-between flex-items-center">
     <div class="left">
       <h6 class="uppercase text-green-light">Seamlessly Easy</h6>
@@ -75,9 +96,10 @@
 <section class="why-us">
   <div class="container">
     <h1>Our Platform</h1>
-    <ul class="flex space-x">
+    <ul class="grid">
       {#each AdaptiveContentProps as content}
         <div class="card text-center">
+          <img src={content.img} width='30'alt="">
           <h6 class="text-green-light uppercase">{content.subtitle}</h6>
           <p>{content.content}</p>
         </div>
