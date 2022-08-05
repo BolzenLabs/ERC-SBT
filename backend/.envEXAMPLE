@@ -2,3 +2,5 @@ RINKEBY_PRIVATE_KEY =
 RINKEBY_ALCHEMY_URL =https://eth-rinkeby.alchemyapi.io/v2/
 GOERLI_PRIVATE_KEY=
 GOERLI_ALCHEMY_URL=https://eth-goerli.g.alchemy.com/v2/
+EVMOS_TESTNET_URL=https://eth.bd.evmos.dev:8545
+EVMOS_PRIVATE_KEY=

@@ -9,6 +9,8 @@ const {
   RINKEBY_ALCHEMY_URL,
   GOERLI_PRIVATE_KEY,
   GOERLI_ALCHEMY_URL,
+  EVMOS_TESTNET_URL,
+  EVMOS_PRIVATE_KEY,
 } = process.env;
 task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
   const accounts = await hre.ethers.getSigners();
@@ -32,8 +34,12 @@ module.exports = {
       accounts: [`0x${RINKEBY_PRIVATE_KEY}`],
     },
     goerli: {
-      url: GOERLI_PRIVATE_KEY,
-      accounts: [`0x${GOERLI_ALCHEMY_URL}`],
+      url: GOERLI_ALCHEMY_URL,
+      accounts: [`0x${GOERLI_PRIVATE_KEY}`],
+    },
+    evmos: {
+      url: EVMOS_TESTNET_URL,
+      accounts: [`0x${EVMOS_PRIVATE_KEY}`],
     },
   },
 };
