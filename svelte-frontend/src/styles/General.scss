@@ -22,7 +22,6 @@ $box-shadow: 0px 4px 204px rgba(0, 0, 0, 0.05);
 	padding: 0;
 	box-sizing: border-box;
 }
-
 body {
 	background-color: $dark-gray;
 	color: $white;
@@ -31,6 +30,7 @@ body {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
+	overflow-x: hidden;
 }
 
 // typography
@@ -160,4 +160,5 @@ a.btn-large {
 	border-radius: $border-radius;
 	background: rgba(128, 251, 80, 0.1);
 	padding: 10px;
+	box-shadow: $box-shadow;
 }
