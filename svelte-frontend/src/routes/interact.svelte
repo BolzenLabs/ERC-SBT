@@ -6,7 +6,7 @@
 	import { onMount } from 'svelte';
 	import ContractPortal from '../../../backend/artifacts/contracts/MySBT.sol/MySBT.json';
 
-	const CONTRACT_ADDRESS = '0x73856B967615d8c20619DB8f3c2d08557B41D8b0';
+	const CONTRACT_ADDRESS = '0x1443F3470c9C597D27C846171f631aA5CBBd23Fc';
 
 	async function getTotalSupply() {
 		if (!window.ethereum) {
