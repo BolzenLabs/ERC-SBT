@@ -19,7 +19,7 @@ async function main() {
   console.log("Account balance:", (await deployer.getBalance()).toString());
   // We get the contract to deploy
   const SBT = await hre.ethers.getContractFactory("MySBT");
-  const sbt = await SBT.deploy();
+  const sbt = await SBT.deploy("MySBT");
 
   await sbt.deployed();
 
