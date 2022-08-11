@@ -314,18 +314,15 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
      * @dev Same as {xref-ERC721-_safeMint-address-uint256-}[`_safeMint`], with an additional `data` parameter which is
      * forwarded in {IERC721Receiver-onERC721Received} to contract recipients.
      */
-    function _safeMint(
-        address to,
-        uint256 tokenId,
-        bytes memory data
-    ) internal virtual {
+    function _safeMint(address to, uint256 tokenId,bytes memory data) internal virtual {
         _mint(to, tokenId);
-        require(
-            _checkOnERC721Received(address(0), to, tokenId, data),
-            "ERC721: transfer to non ERC721Receiver implementer"
-        );
+        require(_checkOnERC721Received(address(0), to, tokenId, data),"ERC721: transfer to non ERC721Receiver implementer");
     }
 
+     function _safeBurn(uint256 tokenId) internal virtual {
+         _burn(tokenId);
+    }
+    
     /**
      * @dev Mints `tokenId` and transfers it to `to`.
      *
@@ -389,30 +386,32 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
      *
      * Emits a {Transfer} event.
      */
-    // function _transfer(
-    //     address from,
-    //     address to,
-    //     uint256 tokenId
-    // ) internal virtual {
-    //     require(
-    //         ERC721.ownerOf(tokenId) == from,
-    //         "ERC721: transfer from incorrect owner"
-    //     );
-    //     require(to != address(0), "ERC721: transfer to the zero address");
+    function _transfer(
+        address from,
+        address to,
+        uint256 tokenId
+    ) internal virtual {
 
-    //     _beforeTokenTransfer(from, to, tokenId);
+                
+        require(
+            ERC721.ownerOf(tokenId) == from,
+            "ERC721: transfer from incorrect owner"
+        );
+        require(to != address(0), "ERC721: transfer to the zero address");
 
-    //     // Clear approvals from the previous owner
-    //     _approve(address(0), tokenId);
+        _beforeTokenTransfer(from, to, tokenId);
 
-    //     _balances[from] -= 1;
-    //     _balances[to] += 1;
-    //     _owners[tokenId] = to;
+        // Clear approvals from the previous owner
+        _approve(address(0), tokenId);
 
-    //     emit Transfer(from, to, tokenId);
+        _balances[from] -= 1;
+        _balances[to] += 1;
+        _owners[tokenId] = to;
 
-    //     _afterTokenTransfer(from, to, tokenId);
-    // }
+        emit Transfer(from, to, tokenId);
+
+        _afterTokenTransfer(from, to, tokenId);
+    }
 
     /**
      * @dev Approve `to` to operate on `tokenId`
