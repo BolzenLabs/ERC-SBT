@@ -25,8 +25,8 @@
 
 			const Contract = new ethers.Contract(CONTRACT_ADDRESS, ContractPortal.abi, signer);
 
-			const transaction = await Contract.safeMint(senderaddress, {
-				gasLimit: 100000
+			const transaction = await Contract.safeMint(senderaddress,"someuser" , "profileURI" , "dataURI", {
+				gasLimit: 800000
 			});
 			await transaction.wait();
 			console.log(transaction);

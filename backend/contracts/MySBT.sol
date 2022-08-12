@@ -60,7 +60,7 @@ contract MySBT is ERC721 {
         accountsToIds[to] = runningIds;
 
    
-        _safeMint(to, runningIds);     
+        // _safeMint(to, runningIds);     
         runningIds+=1;
         totalSupply += 1; // increase total supply
         emit Mint(to);
@@ -72,7 +72,7 @@ contract MySBT is ERC721 {
             revert NonExistingToken();
         if (msg.sender != to) revert NotSelf();
        
-        _safeBurn(profiles[to].id);
+        // _safeBurn(profiles[to].id);
         totalSupply -= 1;
         delete profiles[to];
         // delete accountsToIds[to]; //We are not deleting the accounts that once minted. 
