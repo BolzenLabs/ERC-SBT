@@ -13,8 +13,6 @@ error NotSelf();
 //Invalid Choice
 error InvalidChoice();
 /// Transfers Disallowed
-error TransferDisabled();
-
 contract MySBT is ERC721 {
   
     //Define Profile Data Structure 
@@ -60,7 +58,7 @@ contract MySBT is ERC721 {
         accountsToIds[to] = runningIds;
 
    
-        // _safeMint(to, runningIds);     
+        _safeMint(to, runningIds);     
         runningIds+=1;
         totalSupply += 1; // increase total supply
         emit Mint(to);
@@ -72,7 +70,7 @@ contract MySBT is ERC721 {
             revert NonExistingToken();
         if (msg.sender != to) revert NotSelf();
        
-        // _safeBurn(profiles[to].id);
+        _safeBurn(profiles[to].id);
         totalSupply -= 1;
         delete profiles[to];
         // delete accountsToIds[to]; //We are not deleting the accounts that once minted. 
@@ -115,8 +113,15 @@ contract MySBT is ERC721 {
         return profiles[to];
     }
      // Revert NFT transfers  public view override 
-    function _beforeTokenTransfer(address, address, uint256) internal virtual override {
-    revert TransferDisabled();
+    // function _beforeTokenTransfer(address, address, uint256) internal virtual override {
+    // revert TransferDisabled();
+    // }
+    function _transfer(
+        address from,
+        address to,
+        uint256 tokenId
+    ) internal virtual override{
+        revert TransferDisabled();
     }
     //Function to whitelist an address. 
     function whiteList(address to) public {

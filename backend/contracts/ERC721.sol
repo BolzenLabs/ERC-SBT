@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 // OpenZeppelin Contracts (last updated v4.7.0) (token/ERC721/ERC721.sol)
 
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.11;
 
 import "./IERC721.sol";
 import "./IERC721Receiver.sol";
@@ -11,6 +11,7 @@ import "./Context.sol";
 import "./Strings.sol";
 import "./ERC165.sol";
 
+error TransferDisabled();
 /**
  * @dev Implementation of https://eips.ethereum.org/EIPS/eip-721[ERC721] Non-Fungible Token Standard, including
  * the Metadata extension, but not including the Enumerable extension, which is available separately as
@@ -391,8 +392,6 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
         address to,
         uint256 tokenId
     ) internal virtual {
-
-                
         require(
             ERC721.ownerOf(tokenId) == from,
             "ERC721: transfer from incorrect owner"
