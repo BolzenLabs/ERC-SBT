@@ -5,7 +5,7 @@
 	let message = '';
 	let loading = false;
 
-	async function sendTransaction() {
+	async function sendTransaction(choice) {
 		loading = true;
 		try {
 			const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -25,9 +25,20 @@
 
 			const Contract = new ethers.Contract(CONTRACT_ADDRESS, ContractPortal.abi, signer);
 
-			const transaction = await Contract.safeMint(senderaddress,"someuser" , "profileURI" , "dataURI", {
+			let transaction;
+			if(choice ==0)
+			{
+				transaction = await Contract.safeMint(senderaddress,"someuser" , "profileURI" , "dataURI", {
 				gasLimit: 800000
 			});
+			}
+			else
+			{
+				transaction = await Contract.safeBurn(senderaddress, {
+				gasLimit: 800000
+			});
+			}
+			
 			await transaction.wait();
 			console.log(transaction);
 
@@ -41,9 +52,14 @@
 
 <div>
 	<section class="buttonGroup">
-		<button disabled={loading} class="button buttonWave" on:click={() => sendTransaction()}>
-			<span class="buttonEmoji" role="img" aria-label="wave"> 🔥 </span>
+		<button disabled={loading} class="button buttonWave" on:click={() => sendTransaction(0)}>
+			<span class="buttonEmoji" role="img" aria-label="wave"> 🌿 </span>
 			Mint
+		</button>
+
+		<button disabled={loading} class="button buttonWave" on:click={() => sendTransaction(1)}>
+			<span class="buttonEmoji" role="img" aria-label="wave"> 🔥 </span>
+			Burn
 		</button>
 	</section>
 </div>
