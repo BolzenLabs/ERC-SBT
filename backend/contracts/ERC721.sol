@@ -12,6 +12,7 @@ import "./Strings.sol";
 import "./ERC165.sol";
 
 error TransferDisabled();
+
 /**
  * @dev Implementation of https://eips.ethereum.org/EIPS/eip-721[ERC721] Non-Fungible Token Standard, including
  * the Metadata extension, but not including the Enumerable extension, which is available separately as
@@ -194,46 +195,46 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
     /**
      * @dev See {IERC721-transferFrom}.
      */
-    // function transferFrom(
-    //     address from,
-    //     address to,
-    //     uint256 tokenId
-    // ) public virtual override {
-    //     //solhint-disable-next-line max-line-length
-    //     require(
-    //         _isApprovedOrOwner(_msgSender(), tokenId),
-    //         "ERC721: caller is not token owner nor approved"
-    //     );
+    function transferFrom(
+        address from,
+        address to,
+        uint256 tokenId
+    ) public virtual override {
+        //solhint-disable-next-line max-line-length
+        require(
+            _isApprovedOrOwner(_msgSender(), tokenId),
+            "ERC721: caller is not token owner nor approved"
+        );
 
-    //     _transfer(from, to, tokenId);
-    // }
-
-    /**
-     * @dev See {IERC721-safeTransferFrom}.
-     */
-    // function safeTransferFrom(
-    //     address from,
-    //     address to,
-    //     uint256 tokenId
-    // ) public virtual override {
-    //     safeTransferFrom(from, to, tokenId, "");
-    // }
+        _transfer(from, to, tokenId);
+    }
 
     /**
      * @dev See {IERC721-safeTransferFrom}.
      */
-    // function safeTransferFrom(
-    //     address from,
-    //     address to,
-    //     uint256 tokenId,
-    //     bytes memory data
-    // ) public virtual override {
-    //     require(
-    //         _isApprovedOrOwner(_msgSender(), tokenId),
-    //         "ERC721: caller is not token owner nor approved"
-    //     );
-    //     _safeTransfer(from, to, tokenId, data);
-    // }
+    function safeTransferFrom(
+        address from,
+        address to,
+        uint256 tokenId
+    ) public virtual override {
+        safeTransferFrom(from, to, tokenId, "");
+    }
+
+    /**
+     * @dev See {IERC721-safeTransferFrom}.
+     */
+    function safeTransferFrom(
+        address from,
+        address to,
+        uint256 tokenId,
+        bytes memory data
+    ) public virtual override {
+        require(
+            _isApprovedOrOwner(_msgSender(), tokenId),
+            "ERC721: caller is not token owner nor approved"
+        );
+        _safeTransfer(from, to, tokenId, data);
+    }
 
     /**
      * @dev Safely transfers `tokenId` token from `from` to `to`, checking first that contract recipients
@@ -253,18 +254,18 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
      *
      * Emits a {Transfer} event.
      */
-    // function _safeTransfer(
-    //     address from,
-    //     address to,
-    //     uint256 tokenId,
-    //     bytes memory data
-    // ) internal virtual {
-    //     _transfer(from, to, tokenId);
-    //     require(
-    //         _checkOnERC721Received(from, to, tokenId, data),
-    //         "ERC721: transfer to non ERC721Receiver implementer"
-    //     );
-    // }
+    function _safeTransfer(
+        address from,
+        address to,
+        uint256 tokenId,
+        bytes memory data
+    ) internal virtual {
+        _transfer(from, to, tokenId);
+        require(
+            _checkOnERC721Received(from, to, tokenId, data),
+            "ERC721: transfer to non ERC721Receiver implementer"
+        );
+    }
 
     /**
      * @dev Returns whether `tokenId` exists.
@@ -315,15 +316,22 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
      * @dev Same as {xref-ERC721-_safeMint-address-uint256-}[`_safeMint`], with an additional `data` parameter which is
      * forwarded in {IERC721Receiver-onERC721Received} to contract recipients.
      */
-    function _safeMint(address to, uint256 tokenId,bytes memory data) internal virtual {
+    function _safeMint(
+        address to,
+        uint256 tokenId,
+        bytes memory data
+    ) internal virtual {
         _mint(to, tokenId);
-        require(_checkOnERC721Received(address(0), to, tokenId, data),"ERC721: transfer to non ERC721Receiver implementer");
+        require(
+            _checkOnERC721Received(address(0), to, tokenId, data),
+            "ERC721: transfer to non ERC721Receiver implementer"
+        );
     }
 
-     function _safeBurn(uint256 tokenId) internal virtual {
-         _burn(tokenId);
+    function _safeBurn(uint256 tokenId) internal virtual {
+        _burn(tokenId);
     }
-    
+
     /**
      * @dev Mints `tokenId` and transfers it to `to`.
      *

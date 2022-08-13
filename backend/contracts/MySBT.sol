@@ -12,18 +12,18 @@ error NonExistingToken();
 error NotSelf();
 //Invalid Choice
 error InvalidChoice();
+
 /// Transfers Disallowed
 contract MySBT is ERC721 {
-  
-    //Define Profile Data Structure 
+    //Define Profile Data Structure
     struct Profile {
-        string identity;  //Username 
-        uint256 id;       //Unique ID
+        string identity; //Username
+        uint256 id; //Unique ID
         string profile_uri; //Profile URI
-        string data_uri;    //Data URI
+        string data_uri; //Data URI
     }
 
-    //Contract specific definitions 
+    //Contract specific definitions
     string public contractName; //Contract name
     address public operator; //Contract operator
     bytes32 private zeroHash =
@@ -31,14 +31,14 @@ contract MySBT is ERC721 {
 
     uint256 totalSupply;
     uint256 whitelistCount;
-    uint256 runningIds;  //Running count of the ids to assign. 
+    uint256 runningIds; //Running count of the ids to assign.
 
-    //Contract Mapping Definitions 
+    //Contract Mapping Definitions
     mapping(address => uint256) public whitelist;
 
     mapping(address => Profile) private profiles;
     mapping(address => uint256) public accountsToIds;
-    
+
     event Mint(address _to);
     event Burn(address _to);
     event Update(address _to);
@@ -48,32 +48,35 @@ contract MySBT is ERC721 {
         operator = msg.sender;
     }
 
-    function safeMint(address to, string memory username , string memory profile_uri , string memory data_uri) public {
+    function safeMint(
+        address to,
+        string memory username,
+        string memory profile_uri,
+        string memory data_uri
+    ) public {
         // require(whitelist[to], "Account not whitelisted");
         if (keccak256(bytes(profiles[to].identity)) != zeroHash)
             revert ExistingToken();
         if (msg.sender != to) revert NotSelf();
 
-        profiles[to] = Profile(username, runningIds , profile_uri, data_uri);
+        profiles[to] = Profile(username, runningIds, profile_uri, data_uri);
         accountsToIds[to] = runningIds;
 
-   
-        _safeMint(to, runningIds);     
-        runningIds+=1;
+        _safeMint(to, runningIds);
+        runningIds += 1;
         totalSupply += 1; // increase total supply
         emit Mint(to);
     }
-    
 
     function safeBurn(address to) public {
         if (keccak256(bytes(profiles[to].identity)) == zeroHash)
             revert NonExistingToken();
         if (msg.sender != to) revert NotSelf();
-       
+
         _safeBurn(profiles[to].id);
         totalSupply -= 1;
         delete profiles[to];
-        // delete accountsToIds[to]; //We are not deleting the accounts that once minted. 
+        // delete accountsToIds[to]; //We are not deleting the accounts that once minted.
         emit Burn(to);
     }
 
@@ -107,26 +110,44 @@ contract MySBT is ERC721 {
         return totalSupply;
     }
 
-    function getProfile(address to ) public view returns(Profile memory) {
-       if (keccak256(bytes(profiles[to].identity)) == zeroHash)
+    function getProfile(address to) public view returns (Profile memory) {
+        if (keccak256(bytes(profiles[to].identity)) == zeroHash)
             revert NonExistingToken();
         return profiles[to];
     }
-     // Revert NFT transfers  public view override 
+
+    // Revert NFT transfers  public view override
     // function _beforeTokenTransfer(address, address, uint256) internal virtual override {
     // revert TransferDisabled();
     // }
+    function _safeTransfer(
+        address from,
+        address to,
+        uint256 tokenId,
+        bytes memory data
+    ) internal virtual override {
+        revert TransferDisabled();
+    }
+
     function _transfer(
         address from,
         address to,
         uint256 tokenId
-    ) internal virtual override{
+    ) internal virtual override {
         revert TransferDisabled();
     }
-    //Function to whitelist an address. 
+
+    function transferFrom(
+        address from,
+        address to,
+        uint256 tokenId
+    ) public virtual override {
+        revert TransferDisabled();
+    }
+
+    //Function to whitelist an address.
     function whiteList(address to) public {
         whitelistCount += 1;
         whitelist[to] = whitelistCount;
     }
-   
 }
