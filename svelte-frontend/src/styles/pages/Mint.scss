@@ -1,0 +1,105 @@
+section.mint {
+	position: relative;
+	margin: 0;
+	padding-top: 0;
+	padding-bottom: 200px;
+	h1 {
+		margin-bottom: 12px;
+	}
+	p {
+		margin-bottom: 18px;
+	}
+	.mint-container {
+		padding-top: 100px;
+	}
+	.avatar {
+		width: 50px;
+		height: 50px;
+		border-radius: $border-full;
+		object-fit: cover;
+		color: none;
+		border: none;
+		background-color: none;
+	}
+	form.mint-card {
+		padding: 30px 25px;
+		width: fit-content;
+		#name-div {
+			margin-right: 10px;
+		}
+		input,
+		textarea {
+			padding: 5px;
+			font-size: 16px;
+			border-radius: $border-radius;
+			font-family: inherit;
+			background-color: rgba(255, 255, 255, 0.3);
+		}
+		input,
+		textarea:focus {
+			outline: none;
+		}
+		input {
+			border: none;
+			width: 200px;
+			height: 40px;
+			border-radius: $border-radius;
+
+			margin-bottom: 1rem;
+			display: block;
+		}
+		textarea {
+			width: 100%;
+			margin-bottom: 10px;
+			display: block;
+			height: 150px;
+			border: none;
+		}
+		button.btn {
+			margin-left: auto;
+		}
+		.choose-image {
+			.upload-btn {
+				border: 2px dashed black;
+				display: block;
+				padding: 15px 1.5rem;
+				color: $white-200;
+				text-decoration: none;
+				border-radius: $border-radius;
+				cursor: pointer;
+				margin-right: 12px;
+				font-size: 14px;
+				span {
+					color: white;
+				}
+			}
+		}
+	}
+	// bg images
+	#mint-image {
+		position: absolute;
+		right: -70px;
+		top: -50px;
+		object-fit: cover;
+		height: 850px;
+		margin: 0;
+		width: 50vw;
+	}
+	#mint-gradient {
+		z-index: -1;
+		position: absolute;
+		left: -200px;
+		bottom: 0;
+	}
+	#mint-gradient-2 {
+		z-index: -1;
+		position: absolute;
+		left: -100px;
+		bottom: 0;
+	}
+}
+@media only screen and (max-width: 1000px) {
+	#mint-image {
+		display: none;
+	}
+}

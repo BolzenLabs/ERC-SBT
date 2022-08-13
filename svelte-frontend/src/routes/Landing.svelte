@@ -6,10 +6,6 @@
   // gradient svg
   import elipseWhite from '../lib/assets/elipse-white.svg'
   import triGradient from '../lib/assets/tri-gradient.svg'
-
-  import elipseOrange from '../lib/assets/elipse-orange.svg'
-  import BlueCircle from '../lib/assets/elipse-blue.svg'
-  import GreenCircle from '../lib/assets/elipse-green.svg'
   // why us icons
   import User from '$lib/assets/user.svg'
   import Verified from '$lib/assets/verified.svg'
@@ -76,17 +72,13 @@
 
 <section class="hero">
   <img class="white-circle" src={elipseWhite} alt="">
-
-  <!-- <img class="green-circle" src={GreenCircle} alt=""> -->
-  <!-- <img class="orange-circle" src={OrangeCircle} alt=""> -->
-  <!-- <img class="blue-circle" src={BlueCircle} alt=""> -->
   <div class="container flex flex-between flex-items-center">
     <div class="left">
       <h6 class="uppercase text-green-light">Seamlessly Easy</h6>
       <h1>THe future of <br> Social-Defi</h1>
       <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sint, ducimus exercitationem deleniti veniam voluptates incidunt tempore iste voluptatem impedit! Illo!</p>
       <div class="flex space-x">
-        <a href="#" class="btn btn-primary">Mint Now</a>
+        <a href="/mint" class="btn btn-primary">Mint Now</a>
         <a href="#" class="btn btn-secondary">Learn more</a>
       </div>
       <div class="flex hero-social-proof space-x">
@@ -133,7 +125,6 @@
     <ul class="grid">
       {#each AdaptiveContentProps as content}
         <div class="card text-left">
-          <!-- <img src={content.img} width='30'alt=""> -->
           <h6 class="text-green-light uppercase">{content.subtitle}</h6>
           <p>{content.content}</p>
         </div>
