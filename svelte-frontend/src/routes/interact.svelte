@@ -4,9 +4,9 @@
 	import Wallet from '$lib/components/Wallet.svelte';
 	import SendTX from '$lib/components/SendTX.svelte';
 	import { onMount } from 'svelte';
-	import ContractPortal from '../../../backend/artifacts/contracts/MySBT.sol/MySBT.json';
+	import ContractPortal from '../lib/abis/MySBT.json';
 
-	const CONTRACT_ADDRESS = '0x69Ba3DF7506C0Fda3E4c5d0C2bE17970B63606Ca';
+	const CONTRACT_ADDRESS = '0x4027e07A4caDd6DeE390b704Fe377Ba82eC3B81a';
 
 	async function getTotalSupply() {
 		if (!window.ethereum) {

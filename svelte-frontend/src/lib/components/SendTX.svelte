@@ -1,7 +1,7 @@
 <script>
 	export let CONTRACT_ADDRESS;
 	import { ethers } from 'ethers';
-	import ContractPortal from '../../../../backend/artifacts/contracts/MySBT.sol/MySBT.json';
+	import ContractPortal from '../abis/MySBT.json';
 	let message = '';
 	let loading = false;
 
@@ -26,19 +26,16 @@
 			const Contract = new ethers.Contract(CONTRACT_ADDRESS, ContractPortal.abi, signer);
 
 			let transaction;
-			if(choice ==0)
-			{
-				transaction = await Contract.safeMint(senderaddress,"someuser" , "profileURI" , "dataURI", {
-				gasLimit: 800000
-			});
-			}
-			else
-			{
+			if (choice == 0) {
+				transaction = await Contract.safeMint(senderaddress, 'someuser', 'profileURI', 'dataURI', {
+					gasLimit: 800000
+				});
+			} else {
 				transaction = await Contract.safeBurn(senderaddress, {
-				gasLimit: 800000
-			});
+					gasLimit: 800000
+				});
 			}
-			
+
 			await transaction.wait();
 			console.log(transaction);
 

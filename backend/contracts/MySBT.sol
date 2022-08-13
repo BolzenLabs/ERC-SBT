@@ -29,7 +29,7 @@ contract MySBT is ERC721 {
     bytes32 private zeroHash =
         0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470;
 
-    uint256 totalSupply;
+    uint256 totalSupplyCount;
     uint256 whitelistCount;
     uint256 runningIds; //Running count of the ids to assign.
 
@@ -64,7 +64,7 @@ contract MySBT is ERC721 {
 
         _safeMint(to, runningIds);
         runningIds += 1;
-        totalSupply += 1; // increase total supply
+        totalSupplyCount += 1; // increase total supply
         emit Mint(to);
     }
 
@@ -74,7 +74,7 @@ contract MySBT is ERC721 {
         if (msg.sender != to) revert NotSelf();
 
         _safeBurn(profiles[to].id);
-        totalSupply -= 1;
+        totalSupplyCount -= 1;
         delete profiles[to];
         // delete accountsToIds[to]; //We are not deleting the accounts that once minted.
         emit Burn(to);
@@ -106,8 +106,8 @@ contract MySBT is ERC721 {
     }
 
     //Function to return total supply of SBTS
-    function getTotalSupply() public view returns (uint256) {
-        return totalSupply;
+    function totalSupply() public view returns (uint256) {
+        return totalSupplyCount;
     }
 
     function getProfile(address to) public view returns (Profile memory) {
