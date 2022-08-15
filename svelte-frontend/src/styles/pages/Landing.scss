@@ -1,0 +1,125 @@
+.hero {
+	.white-circle {
+		top: 0;
+		left: 0;
+		position: absolute;
+	}
+	h1 + p {
+		line-height: 150%;
+		max-width: fit-content;
+		margin-bottom: 20px;
+	}
+	h1 {
+		font-family: 'Audiowide', cursive;
+		font-size: 3.52rem;
+		margin-bottom: 8px;
+	}
+	.right {
+		#tri-gradient {
+			position: absolute;
+			top: 0;
+			right: -100px;
+			overflow-x: hidden;
+		}
+		.card {
+			position: relative;
+			z-index: 100;
+		}
+	}
+	// Card
+	.card {
+		width: 300px;
+		height: auto;
+		img {
+			width: fit-content;
+			width: 280px;
+			height: 300px;
+			object-fit: cover;
+		}
+		.card-footer {
+			h6 {
+				font-family: 'Audiowide', cursive;
+			}
+		}
+	}
+	.btn {
+		margin-bottom: 30px;
+	}
+	.hero-social-proof {
+		img {
+			width: 100px;
+			height: auto;
+		}
+	}
+}
+// why us
+.why-us {
+	position: relative;
+	z-index: 99;
+	#tri-gradient,
+	#tri-gradient-2 {
+		position: absolute;
+		z-index: 0;
+		opacity: 0.6;
+	}
+	#tri-gradient {
+		top: -110px;
+		left: 10px;
+	}
+	#tri-gradient-2 {
+		right: 0;
+		top: -10px;
+	}
+	.grid {
+		grid-template-columns: repeat(3, 1fr);
+		justify-content: center;
+		column-gap: 10px;
+	}
+	.card {
+		// border: 1.5px solid $white-200;
+		z-index: 100;
+	}
+}
+// featured profiles
+.featured {
+	position: relative;
+	z-index: 99;
+	#tri-gradient,
+	#tri-gradient-2 {
+		position: absolute;
+		z-index: 0;
+		opacity: 0.65;
+	}
+	#tri-gradient {
+		top: 110px;
+		left: 10px;
+	}
+	#tri-gradient-2 {
+		right: 0;
+		top: -10px;
+	}
+	.grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+		gap: 20px;
+
+		.card {
+			z-index: 101;
+			img {
+				width: 160px;
+				object-fit: cover;
+			}
+		}
+	}
+}
+
+// media queries
+@media only screen and (max-width: 900px) {
+	// fix gradient position
+	#tri-gradient {
+		display: none;
+	}
+	.white-circle {
+		display: none;
+	}
+}

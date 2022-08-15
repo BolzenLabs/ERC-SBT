@@ -1,0 +1,102 @@
+// flex
+.flex {
+	display: flex;
+}
+.flex-col {
+	flex-direction: column;
+}
+.flex-between {
+	justify-content: space-between;
+}
+.flex-around {
+	justify-content: space-around;
+}
+.flex-center {
+	justify-content: center;
+}
+.flex-items-center {
+	align-items: center !important;
+}
+.flex-items-end {
+	align-items: flex-end;
+	align-content: flex-end;
+}
+.flex-self-center {
+	align-self: center;
+}
+.flex-self-end {
+	align-self: flex-end;
+}
+.justify-end {
+	justify-content: flex-end;
+}
+
+.flex-items-start {
+	align-items: flex-start;
+	align-content: flex-start;
+}
+// self
+
+// grid
+.grid {
+	display: grid;
+}
+.grid-auto-3 {
+}
+// margin
+.space-x > * {
+	margin-left: 10px;
+	margin-right: 10px;
+}
+.space-x > :last-child {
+	margin-right: 0;
+}
+.space-x > :first-child {
+	margin-left: 0;
+}
+.space-y > * {
+	margin-bottom: 5px;
+}
+.space-y > :last-child {
+	margin-right: 0;
+}
+.center {
+	margin: 0 auto !important;
+}
+// padding
+
+// section and container
+section,
+footer {
+	padding: 5rem 30px;
+}
+nav {
+	padding: 30px 30px;
+}
+.container {
+	max-width: 1530px;
+	width: 100%;
+	width: calc(100% - 1rem);
+	margin: 0 auto;
+}
+// radius
+.radius-full {
+	border-radius: 100%;
+}
+
+// display inline/block/inline-block
+.block {
+	display: block;
+}
+.inline {
+	display: inline;
+}
+.inline-block {
+	display: inline-block;
+}
+
+@media only screen and (max-width: 800px) {
+	section {
+		padding: 5rem 10px;
+	}
+}
