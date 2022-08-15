@@ -14,7 +14,8 @@ $green: #9ef01a;
 $white: white;
 $white-200: #e6e6e6;
 $border-radius: 5px;
-$box-shadow: 0px 4px 204px rgba(0, 0, 0, 0.05);
+$border-full: 1000px;
+$box-shadow: 0px 4px 404px rgba(0, 0, 0, 0.05);
 
 // body
 * {
@@ -34,9 +35,14 @@ body {
 }
 
 // typography
+label {
+	display: block;
+	font-size: 14px;
+}
 p {
 	color: $white-200;
-	font-weight: 200;
+	font-weight: 100;
+	font-size: 16px;
 }
 a {
 	font-weight: 500;
@@ -97,6 +103,12 @@ ul li a {
 .text-center {
 	text-align: center;
 }
+.text-left {
+	text-align: left;
+}
+.text-right {
+	text-align: right;
+}
 .uppercase {
 	letter-spacing: 0.3rem;
 	text-transform: uppercase;
@@ -111,6 +123,9 @@ small,
 // text colors
 .text-green {
 	color: $primary;
+}
+.text-blue {
+	color: $link-blue;
 }
 .text-green-light {
 	color: $primary-light;
@@ -158,7 +173,10 @@ a.btn-large {
 // // Card
 .card {
 	border-radius: $border-radius;
-	background: rgba(128, 251, 80, 0.1);
+	// background: rgba(128, 251, 80, 0.1);
+	background-color: rgba(255, 255, 255, 0.15);
+
 	padding: 10px;
 	box-shadow: $box-shadow;
+	backdrop-filter: blur(150px) saturate(400%);
 }
