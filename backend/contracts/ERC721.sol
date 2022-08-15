@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 // OpenZeppelin Contracts (last updated v4.7.0) (token/ERC721/ERC721.sol)
 
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.11;
 
 import "./IERC721.sol";
 import "./IERC721Receiver.sol";
@@ -10,6 +10,8 @@ import "./Address.sol";
 import "./Context.sol";
 import "./Strings.sol";
 import "./ERC165.sol";
+
+error TransferDisabled();
 
 /**
  * @dev Implementation of https://eips.ethereum.org/EIPS/eip-721[ERC721] Non-Fungible Token Standard, including
@@ -193,46 +195,46 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
     /**
      * @dev See {IERC721-transferFrom}.
      */
-    // function transferFrom(
-    //     address from,
-    //     address to,
-    //     uint256 tokenId
-    // ) public virtual override {
-    //     //solhint-disable-next-line max-line-length
-    //     require(
-    //         _isApprovedOrOwner(_msgSender(), tokenId),
-    //         "ERC721: caller is not token owner nor approved"
-    //     );
+    function transferFrom(
+        address from,
+        address to,
+        uint256 tokenId
+    ) public virtual override {
+        //solhint-disable-next-line max-line-length
+        require(
+            _isApprovedOrOwner(_msgSender(), tokenId),
+            "ERC721: caller is not token owner nor approved"
+        );
 
-    //     _transfer(from, to, tokenId);
-    // }
-
-    /**
-     * @dev See {IERC721-safeTransferFrom}.
-     */
-    // function safeTransferFrom(
-    //     address from,
-    //     address to,
-    //     uint256 tokenId
-    // ) public virtual override {
-    //     safeTransferFrom(from, to, tokenId, "");
-    // }
+        _transfer(from, to, tokenId);
+    }
 
     /**
      * @dev See {IERC721-safeTransferFrom}.
      */
-    // function safeTransferFrom(
-    //     address from,
-    //     address to,
-    //     uint256 tokenId,
-    //     bytes memory data
-    // ) public virtual override {
-    //     require(
-    //         _isApprovedOrOwner(_msgSender(), tokenId),
-    //         "ERC721: caller is not token owner nor approved"
-    //     );
-    //     _safeTransfer(from, to, tokenId, data);
-    // }
+    function safeTransferFrom(
+        address from,
+        address to,
+        uint256 tokenId
+    ) public virtual override {
+        safeTransferFrom(from, to, tokenId, "");
+    }
+
+    /**
+     * @dev See {IERC721-safeTransferFrom}.
+     */
+    function safeTransferFrom(
+        address from,
+        address to,
+        uint256 tokenId,
+        bytes memory data
+    ) public virtual override {
+        require(
+            _isApprovedOrOwner(_msgSender(), tokenId),
+            "ERC721: caller is not token owner nor approved"
+        );
+        _safeTransfer(from, to, tokenId, data);
+    }
 
     /**
      * @dev Safely transfers `tokenId` token from `from` to `to`, checking first that contract recipients
@@ -252,18 +254,18 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
      *
      * Emits a {Transfer} event.
      */
-    // function _safeTransfer(
-    //     address from,
-    //     address to,
-    //     uint256 tokenId,
-    //     bytes memory data
-    // ) internal virtual {
-    //     _transfer(from, to, tokenId);
-    //     require(
-    //         _checkOnERC721Received(from, to, tokenId, data),
-    //         "ERC721: transfer to non ERC721Receiver implementer"
-    //     );
-    // }
+    function _safeTransfer(
+        address from,
+        address to,
+        uint256 tokenId,
+        bytes memory data
+    ) internal virtual {
+        _transfer(from, to, tokenId);
+        require(
+            _checkOnERC721Received(from, to, tokenId, data),
+            "ERC721: transfer to non ERC721Receiver implementer"
+        );
+    }
 
     /**
      * @dev Returns whether `tokenId` exists.
@@ -324,6 +326,10 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
             _checkOnERC721Received(address(0), to, tokenId, data),
             "ERC721: transfer to non ERC721Receiver implementer"
         );
+    }
+
+    function _safeBurn(uint256 tokenId) internal virtual {
+        _burn(tokenId);
     }
 
     /**
@@ -389,30 +395,30 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
      *
      * Emits a {Transfer} event.
      */
-    // function _transfer(
-    //     address from,
-    //     address to,
-    //     uint256 tokenId
-    // ) internal virtual {
-    //     require(
-    //         ERC721.ownerOf(tokenId) == from,
-    //         "ERC721: transfer from incorrect owner"
-    //     );
-    //     require(to != address(0), "ERC721: transfer to the zero address");
+    function _transfer(
+        address from,
+        address to,
+        uint256 tokenId
+    ) internal virtual {
+        require(
+            ERC721.ownerOf(tokenId) == from,
+            "ERC721: transfer from incorrect owner"
+        );
+        require(to != address(0), "ERC721: transfer to the zero address");
 
-    //     _beforeTokenTransfer(from, to, tokenId);
+        _beforeTokenTransfer(from, to, tokenId);
 
-    //     // Clear approvals from the previous owner
-    //     _approve(address(0), tokenId);
+        // Clear approvals from the previous owner
+        _approve(address(0), tokenId);
 
-    //     _balances[from] -= 1;
-    //     _balances[to] += 1;
-    //     _owners[tokenId] = to;
+        _balances[from] -= 1;
+        _balances[to] += 1;
+        _owners[tokenId] = to;
 
-    //     emit Transfer(from, to, tokenId);
+        emit Transfer(from, to, tokenId);
 
-    //     _afterTokenTransfer(from, to, tokenId);
-    // }
+        _afterTokenTransfer(from, to, tokenId);
+    }
 
     /**
      * @dev Approve `to` to operate on `tokenId`
