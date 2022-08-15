@@ -1,0 +1,32 @@
+nav {
+	.container {
+		.flex {
+			align-items: center;
+		}
+		ul li {
+			margin-right: 10px;
+			font-size: 15px;
+		}
+		ul li .btn {
+			font-size: 15px;
+		}
+		.nav-link {
+			color: $white-200;
+			text-decoration: none;
+		}
+		ul li:last-child {
+			margin-right: 0;
+		}
+	}
+}
+.nav-logo {
+	font-size: 22px;
+	text-decoration: none;
+	color: white;
+	font-style: italic;
+	letter-spacing: 0px;
+	font-family: 'Audiowide', cursive;
+	span {
+		color: $primary-light;
+	}
+}

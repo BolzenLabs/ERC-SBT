@@ -1,0 +1,9 @@
+// Import Stylesheets
+@import './styles/General.scss';
+@import './styles/Helpers.scss';
+// Import Components
+@import './styles/components/Nav.scss';
+@import './styles/components/Footer.scss';
+// Import Pages
+@import './styles/pages/Landing.scss';
+@import './styles/pages/Mint.scss';

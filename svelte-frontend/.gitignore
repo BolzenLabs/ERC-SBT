@@ -2,11 +2,11 @@
 node_modules
 /build
 /.svelte-kit
+svelte-frontend/yarn.lock
 /package
 .env
 .env.*
 !.env.example
-
 coverage
 coverage.json
 typechain
