@@ -16,7 +16,7 @@
 		const provider = new ethers.providers.Web3Provider(window.ethereum);
 		const Contract = new ethers.Contract(CONTRACT_ADDRESS, ContractPortal.abi, provider);
 
-		const totalSupply = await Contract.getTotalSupply();
+		const totalSupply = await Contract.totalSupply();
 		console.log(totalSupply);
 	}
 

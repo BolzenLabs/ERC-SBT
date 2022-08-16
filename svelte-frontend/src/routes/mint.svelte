@@ -4,6 +4,72 @@
 	import TriGradient from '$lib/assets/tri-gradient.svg';
 	import { user } from '$lib/components/store';
 	import { store_picture, store_json } from '$lib/stores/web3_storage';
+	// contract imports
+	import { ethers } from 'ethers';
+	import Header from '$lib/components/header.svelte';
+	import Wallet from '$lib/components/Wallet.svelte';
+	import SendTX from '$lib/components/SendTX.svelte';
+	import { onMount } from 'svelte';
+	import ContractPortal from '../lib/abis/MySBT.json';
+	const CONTRACT_ADDRESS = '0x4027e07A4caDd6DeE390b704Fe377Ba82eC3B81a';
+	// mint functions
+	let message = '';
+	let loading = false;
+
+	async function sendTransaction(choice) {
+		loading = true;
+		try {
+			const provider = new ethers.providers.Web3Provider(window.ethereum);
+			const signer = provider.getSigner();
+			//Grab the address
+			let senderaddress = '';
+			const { ethereum } = window;
+			await ethereum
+				.request({ method: 'eth_requestAccounts' })
+				.then((accountList) => {
+					const [firstAccount] = accountList;
+					senderaddress = firstAccount;
+				})
+				.catch((error) => {
+					console.log('error getting address');
+				});
+
+			const Contract = new ethers.Contract(CONTRACT_ADDRESS, ContractPortal.abi, signer);
+
+			let transaction;
+			if (choice == 0) {
+				transaction = await Contract.safeMint(senderaddress, 'someuser', 'profileURI', 'dataURI', {
+					gasLimit: 800000
+				});
+			} else {
+				transaction = await Contract.safeBurn(senderaddress, {
+					gasLimit: 800000
+				});
+			}
+
+			await transaction.wait();
+			console.log(transaction);
+
+			loading = false;
+		} catch (error) {
+			alert('Error while sending wave', error);
+			loading = false;
+		}
+	}
+	// total supply function
+	async function getTotalSupply() {
+		if (!window.ethereum) {
+			return;
+		}
+
+		const provider = new ethers.providers.Web3Provider(window.ethereum);
+		const Contract = new ethers.Contract(CONTRACT_ADDRESS, ContractPortal.abi, provider);
+
+		const totalSupply = await Contract.totalSupply();
+		console.log(totalSupply);
+	}
+
+	onMount(getTotalSupply);
 
 	export let result, fileinput, picture_file;
 
@@ -97,6 +163,9 @@
 					title="Mint Button "
 					on:click={() => {
 						mint_profile($user.name, $user.username, $user.handle, $user.bio);
+					}}
+					on:click={() => {
+						sendTransaction(0);
 					}}>Mint Profile</a
 				>
 			</p>
